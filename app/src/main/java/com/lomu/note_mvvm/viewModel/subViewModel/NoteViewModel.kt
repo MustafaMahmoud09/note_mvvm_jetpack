@@ -124,31 +124,36 @@ class NoteViewModel : BaseViewModel() , ICategoryListener,INoteListener,ICategor
 
         fun addNote(context: Context, note: Note){
 
-
+                ONoteView.disposeAdd.clear()
                 NoteRepository.insertNote(context,note)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(::onComplete,::onError)
+                    .addToCompositeDisposable(ONoteView.disposeAdd)
 
         }//end addNote
 
         fun deleteNote(context: Context, note: Note){
 
+                ONoteView.disposeDelete.clear()
                 NoteRepository
                     .deleteNote(context,note)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(::onComplete,::onError)
+                    .addToCompositeDisposable(ONoteView.disposeDelete)
 
         }//end deleteNote
 
         fun updateNote(context: Context,note: Note){
 
+                ONoteView.disposeUpdate.clear()
                 NoteRepository
                     .updateNote(context,note)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(::onComplete,::onError)
+                    .addToCompositeDisposable(ONoteView.disposeUpdate)
 
         }//end updateNote
 
@@ -249,14 +254,15 @@ class NoteViewModel : BaseViewModel() , ICategoryListener,INoteListener,ICategor
 
       override fun onLongClickListenerOnNote(note: NoteDomain) : Boolean{
 
+               val noteEntity = MappingFromNoteToNoteEntity().mapper(note)
+               _deleteNote.postValue(noteEntity)
                changeStateDelete(true)
-               _deleteNote.postValue(MappingFromNoteToNoteEntity().mapper(note))
-
                return true
 
       }//end onLongClickListenerOnNote
 
       fun changeStateDelete(boolean: Boolean){
+
              _stateDelete.postValue(boolean)
       }//end changeStateDelete
 }

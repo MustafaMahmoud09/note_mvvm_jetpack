@@ -1,6 +1,7 @@
 package com.lomu.note_mvvm.view.fragment.subFragment
 
 import android.app.Activity
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -9,8 +10,6 @@ import com.lomu.note_mvvm.R
 import com.lomu.note_mvvm.databinding.FragmentNoteBinding
 import com.lomu.note_mvvm.domain.data.NoteDomain
 import com.lomu.note_mvvm.model.data.entity.Category
-import com.lomu.note_mvvm.model.data.entity.Note
-import com.lomu.note_mvvm.model.data.entity.Task
 import com.lomu.note_mvvm.view.adapter.subAdapter.CategoryAdapter
 import com.lomu.note_mvvm.view.adapter.subAdapter.NoteAdapter
 import com.lomu.note_mvvm.view.fragment.BaseFragment
@@ -25,6 +24,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
           private lateinit var noteViewModel: NoteViewModel
           private lateinit var categoryAdapter: CategoryAdapter
           private lateinit var noteAdapter: NoteAdapter
+
 
           override fun setupResume() {
 
@@ -41,35 +41,45 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
 
           private fun deleteNote(){
 
-                  noteViewModel.deleteNote.observe(this,::onSuccessDeleteItem)
+                  noteViewModel
+                      .stateDelete
+                      .observe(
+                          this,
+                          ::onSuccessDeleteItem
+                      )
+
           }//end deleteNote
 
-          private fun onSuccessDeleteItem(item: Note){
+          private fun onSuccessDeleteItem(item: Boolean){
 
-                  if(noteViewModel.stateDelete.value == true){
+                  if(item){
 
-                          showDialogDelete(item)
+                          showDialogDelete()
                   }//end if
           }//end onSuccessDeleteItem
 
-         private fun showDialogDelete(note: Note){
+         private fun showDialogDelete(){
 
+                 noteViewModel.changeStateDelete(false)
                  dialogBuilder = context?.let { AlertDialog.Builder(it) }!!
                  dialogBuilder.setMessage(resources.getString(R.string.delete_msg_note))
 
-                 dialogBuilder.setPositiveButton(resources.getString(R.string.delete_btn))
-                     { _, _ -> positiveButtonDelete(note) }
+                 dialogBuilder.setPositiveButton(
+                     resources.getString(R.string.delete_btn)
+                 ){ _, _ -> positiveButtonDelete() }
 
                  dialogCreate = dialogBuilder.create()
                  dialogCreate.show()
 
-                 noteViewModel.changeStateDelete(false)
-
         }//end showDialogDelete
 
-         private fun positiveButtonDelete(dataDelete : Note){
+         private fun positiveButtonDelete(){
 
-                      noteViewModel.deleteNote(activity!!.applicationContext,dataDelete)
+                  noteViewModel.deleteNote(
+                      activity!!.applicationContext,
+                      noteViewModel.deleteNote.value!!
+                  )
+
          }//end positiveButtonDelete
 
 
@@ -81,7 +91,12 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
 
           private fun clickAddNote(){
 
-                noteViewModel.clickAddNoteButton.observe(this,::onSuccessAddNoteButton)
+                noteViewModel
+                    .clickAddNoteButton
+                    .observe(
+                        this,
+                        ::onSuccessAddNoteButton
+                    )
           }//end clickAddFolder
 
           private fun onSuccessAddNoteButton(data:Boolean){
@@ -102,7 +117,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
                            val action = MainFragmentDirections
                                .actionMainFragmentToAddNoteFragment(
                                    NoteDomain(
-                                   0,"mustafa","mustafa mahmoud", Date(),0,0
+                                   0,"","", Date(),0,0
                                )
                                )
 
@@ -158,8 +173,14 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
           private fun getDataNotes(){
 
                   noteViewModel.apply {
-                      idCategoryToSelectDataForIt.observe(this@NoteFragment, ::onSuccessGetDataNotesByIdNote)
-                      searchImplement(activity!!.applicationContext)
+                      idCategoryToSelectDataForIt
+                          .observe(
+                              this@NoteFragment,
+                              ::onSuccessGetDataNotesByIdNote
+                          )
+                      searchImplement(
+                          activity!!.applicationContext
+                      )
                   }
           }//end getDataNotes
 
@@ -176,7 +197,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
            }//end adapter
 
            private fun categoryAdapter(){
-                    categoryAdapter = CategoryAdapter(mutableListOf(),noteViewModel,noteViewModel)
+                    categoryAdapter = CategoryAdapter(mutableListOf(),noteViewModel,this)
                     fragment.recyclerCategory.adapter = categoryAdapter
 
                     noteViewModel.allCategory.observe(this,::onSuccessCategory)

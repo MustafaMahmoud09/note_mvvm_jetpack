@@ -5,16 +5,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
-import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.lomu.note_mvvm.R
 import com.lomu.note_mvvm.databinding.FragmentAddNoteBinding
 import com.lomu.note_mvvm.model.data.entity.Category
 import com.lomu.note_mvvm.model.data.entity.Note
-import com.lomu.note_mvvm.view.adapter.intrerfaces.ICategoryListener
-import com.lomu.note_mvvm.view.adapter.intrerfaces.ICategorySelectorListener
 import com.lomu.note_mvvm.view.adapter.subAdapter.CategorySelectAdapter
 import com.lomu.note_mvvm.view.fragment.BaseFragment
 import com.lomu.note_mvvm.viewModel.subViewModel.NoteViewModel

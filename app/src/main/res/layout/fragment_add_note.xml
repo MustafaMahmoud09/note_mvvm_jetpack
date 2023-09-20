@@ -86,6 +86,7 @@
                         android:id="@+id/selectorCategory"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textSize="@dimen/text_10"
                         android:hint="@{viewModel.titleCategorySelected}"
                         android:background="@drawable/spinner_shape"
                         android:backgroundTint="@color/background_clicked_category"
