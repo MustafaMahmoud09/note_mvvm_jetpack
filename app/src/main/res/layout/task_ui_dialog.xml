@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+
+          <variable
+              name="viewModel"
+              type="com.lomu.note_mvvm.viewModel.subViewModel.TaskViewModel"
+              />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/theme_primary_dark"
+        >
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/appCompatEditText"
+            style="@style/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="@string/create_new_task"
+            android:padding="@dimen/margin_16"
+            android:text="@={viewModel.textAddTaskToDataBase}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_16"
+            android:background="@android:color/transparent"
+            android:onClick="@{() -> viewModel.executeFinallyAddTask(viewModel.textAddTaskToDataBase)}"
+            android:text="@string/ok"
+            android:textColor="@color/white_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatEditText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

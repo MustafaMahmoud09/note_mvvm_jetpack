@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/noteFragment">
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.lomu.note_mvvm.view.fragment.subFragment.NoteFragment"
+        android:label="NoteFragment"
+        tools:layout="@layout/fragment_note"
+        />
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.lomu.note_mvvm.view.fragment.subFragment.TaskFragment"
+        android:label="TaskFragment"
+        tools:layout="@layout/fragment_task"
+        />
+</navigation>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+      <variable
+          name="viewModel"
+          type="com.lomu.note_mvvm.viewModel.subViewModel.NoteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.subFragment.NoteFragment"
+        android:background="@color/theme_dark"
+        android:paddingHorizontal="@dimen/margin_12"
+        >
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/searchEdit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_44"
+            style="@style/edit_search"
+            android:text="@={viewModel.searchKey}"
+            android:hint="@string/search_notes"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCategory"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/margin_44"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:orientation="horizontal"
+            android:layout_marginVertical="@dimen/margin_16"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toStartOf="@+id/buttonFolderId"
+            app:layout_constraintStart_toStartOf="@+id/searchEdit"
+            app:layout_constraintTop_toBottomOf="@+id/searchEdit" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerNote"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/zero"
+            android:layout_marginTop="@dimen/margin_16"
+            android:orientation="vertical"
+            app:spanCount="2"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/margin_4"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerCategory"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/float_background"
+            android:onClick="@{() -> viewModel.clickAddNoteButton(true)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_baseline_add_24"
+            android:transitionName="sharedAddNote"
+            />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/text.message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_notes_here_yet"
+            app:checkNotData="@{viewModel.notes.size()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerCategory" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/margin_96"
+            android:layout_height="@dimen/zero"
+            style="@style/image_not_found"
+            app:checkNotData="@{viewModel.notes.size()}"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            />
+
+        <ImageButton
+            android:id="@+id/buttonFolderId"
+            android:layout_width="@dimen/margin_40"
+            android:layout_height="@dimen/zero"
+            android:layout_marginEnd="@dimen/margin_4"
+            android:onClick="@{() -> viewModel.clickOnFolderButton(true)}"
+            android:background="@drawable/folder_add"
+            app:layout_constraintDimensionRatio="1:1"
+            android:elevation="@dimen/margin_2"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerCategory"
+            app:layout_constraintEnd_toEndOf="@+id/searchEdit"
+            app:layout_constraintTop_toTopOf="@+id/recyclerCategory"
+            app:srcCompat="@drawable/ic_baseline_folder_open_24"
+            app:tint="@color/float_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

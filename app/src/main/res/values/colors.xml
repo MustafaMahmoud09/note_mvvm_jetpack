@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="float_button">#F9A501</color>
+    <color name="theme_dark">#000000</color>
+    <color name="theme_primary_dark">#1F1F1F</color>
+    <color name="white_dark">#989393</color>
+    <color name="background_search">#1F1F1F</color>
+    <color name="background_clicked_category">#3A3A3A</color>
+    <color name="theme_notes">#3A3A3A</color>
+    <color name="white_tint">#FFFFFFFF</color>
+    <color name="dark_white">#FFFFFFFF</color>
+    <color name="theme_primary_dialog">#363636</color>
+    <color name="blue">#0C84FF</color>
+    <color name="white_1">#FFFFFF</color>
+    <color name="black_1">#000000</color>
+</resources>

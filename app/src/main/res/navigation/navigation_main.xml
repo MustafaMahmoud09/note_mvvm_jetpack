@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.lomu.note_mvvm.view.fragment.subFragment.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main"
+        >
+        <action
+            android:id="@+id/action_mainFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment"
+            app:enterAnim="@anim/enter_note_folder"
+            app:exitAnim="@anim/exist_folder_note"
+            app:popEnterAnim="@anim/pop_enter_note_folder"
+            app:popExitAnim="@anim/pop_exist_folder_note"
+            />
+        <action
+            android:id="@+id/action_mainFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.lomu.note_mvvm.view.fragment.subFragment.CategoryFragment"
+        android:label="CategoryFragment"
+        tools:layout="@layout/fragment_category"
+        />
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="com.lomu.note_mvvm.view.fragment.subFragment.AddNoteFragment"
+        android:label="fragment_add_note"
+        tools:layout="@layout/fragment_add_note" >
+        <argument
+            android:name="data"
+            app:argType="com.lomu.note_mvvm.domain.data.NoteDomain" />
+    </fragment>
+</navigation>

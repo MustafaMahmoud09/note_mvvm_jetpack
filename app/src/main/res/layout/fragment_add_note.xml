@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+     <variable
+         name="viewModel"
+         type="com.lomu.note_mvvm.viewModel.subViewModel.NoteViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".AddNoteFragment"
+        android:background="@color/theme_dark"
+        android:transitionName="sharedAddNote"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:backgroundTint="@color/theme_dark"
+            style="@style/Toolbar"
+            android:paddingHorizontal="@dimen/margin_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/margin_32"
+            android:layout_height="@dimen/zero"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginEnd="@dimen/margin_16"
+            app:tint="@color/white"
+            android:onClick="@{()-> viewModel.clickAddNote()}"
+            app:layout_constraintEnd_toEndOf="@id/toolbar"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"
+            app:srcCompat="@drawable/check" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/margin_32"
+            android:layout_height="@dimen/zero"
+            app:tint="@color/white"
+            android:layout_marginEnd="@dimen/margin_16"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            android:onClick="@{()-> viewModel.clickShareNote()}"
+            app:srcCompat="@drawable/ic_baseline_share_24" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/TextInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="@dimen/margin_56"
+                    android:layout_marginTop="@dimen/text_16"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    app:layout_constraintDimensionRatio="3:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconTint="@color/float_button"
+                    app:endIconTint="@color/float_button"
+                    app:startIconDrawable="@drawable/ic_baseline_folder_open_24">
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/selectorCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@{viewModel.titleCategorySelected}"
+                        android:background="@drawable/spinner_shape"
+                        android:backgroundTint="@color/background_clicked_category"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editTextTextPersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:text="@={viewModel.title}"
+                    android:fontFamily="sans-serif-medium"
+                    android:hint="@string/title"
+                    android:maxLines="8"
+                    android:textSize="@dimen/text_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/TextInputLayout" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_32"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:text="@={viewModel.body}"
+                    android:hint="@string/start_write"
+                    android:maxLines="12"
+                    android:textSize="@dimen/text_18"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:text="@{viewModel.date.toLocaleString()}"
+                    android:textSize="@dimen/text_12"
+                    app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

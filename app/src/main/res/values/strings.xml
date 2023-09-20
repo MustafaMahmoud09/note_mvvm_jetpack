@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name" translatable="false">Notes</string>
+    <string name="task" translatable="false">Task</string>
+    <string name="note" translatable="false">Note</string>
+    <string name="no_tasks_here_yet" translatable="false">No tasks here yet</string>
+    <string name="no_notes_here_yet" translatable="false">No notes here yet</string>
+    <string name="search_task">Search for tasks</string>
+    <string name="search_notes">Search for notes</string>
+    <string name="create_new_task">Create a new task</string>
+    <string name="ok">complete</string>
+    <string name="delete_msg_note">Do you want to delete the note?</string>
+    <string name="delete_msg_dialog">Do you want to delete the task?</string>
+    <string name="delete_msg_one_folder">Do you want to delete the folder?</string>
+    <string name="delete_btn">delete</string>
+    <string name="folders">Folders</string>
+    <string name="new_folder">New folder</string>
+    <string name="delete_all_folder_msg">Do you want to delete all folders?</string>
+    <string name="enter_text">Enter text</string>
+    <string name="cancel">Cancel</string>
+    <string name="okk">Ok</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="title">Title</string>
+    <string name="start_write">Type something</string>
+    <string name="add">Add</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="float_button">#F9A501</color>
+    <color name="theme_dark">#000000</color>
+    <color name="theme_primary_dark">#1F1F1F</color>
+    <color name="white_dark">#989393</color>
+</resources>
