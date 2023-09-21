@@ -13,12 +13,12 @@ import com.lomu.note_mvvm.model.data.entity.Category
 import com.lomu.note_mvvm.model.data.entity.Note
 import com.lomu.note_mvvm.view.adapter.subAdapter.CategorySelectAdapter
 import com.lomu.note_mvvm.view.fragment.BaseFragment
-import com.lomu.note_mvvm.viewModel.subViewModel.NoteViewModel
+import com.lomu.note_mvvm.viewModel.subViewModel.AddNoteViewModel
 import java.util.*
 
 class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(R.layout.fragment_add_note){
 
-       lateinit var noteViewModel: NoteViewModel
+       lateinit var noteViewModel: AddNoteViewModel
        lateinit var categoryAdapter : CategorySelectAdapter
 
         override fun setup() {
@@ -87,7 +87,7 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(R.layout.fragment_a
         override fun defineViewModel() {
               super.defineViewModel()
 
-              noteViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
+              noteViewModel = ViewModelProvider(this)[AddNoteViewModel::class.java]
               fragment.viewModel = noteViewModel
 
         }//end defineViewModel
@@ -104,7 +104,9 @@ class AddNoteFragment : BaseFragment<FragmentAddNoteBinding>(R.layout.fragment_a
 
                  sharedElementEnterTransition = TransitionInflater
                                                          .from(context)
-                                                         .inflateTransition(android.R.transition.move)
+                                                         .inflateTransition(
+                                                             android.R.transition.move
+                                                         )
 
         }//end knowFragmentAboutTransition
 

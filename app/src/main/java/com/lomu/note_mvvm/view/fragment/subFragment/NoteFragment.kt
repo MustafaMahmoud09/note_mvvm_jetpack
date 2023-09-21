@@ -1,7 +1,7 @@
 package com.lomu.note_mvvm.view.fragment.subFragment
 
 import android.app.Activity
-import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -24,6 +24,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
           private lateinit var noteViewModel: NoteViewModel
           private lateinit var categoryAdapter: CategoryAdapter
           private lateinit var noteAdapter: NoteAdapter
+          var check = true
 
 
           override fun setupResume() {
@@ -36,7 +37,6 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
                 getDataNotes()
                 clickListener()
                 deleteNote()
-
           }//end setup
 
           private fun deleteNote(){
@@ -52,15 +52,15 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
 
           private fun onSuccessDeleteItem(item: Boolean){
 
-                  if(item){
+                  if(item && check){
 
+                          check = false
                           showDialogDelete()
                   }//end if
           }//end onSuccessDeleteItem
 
          private fun showDialogDelete(){
 
-                 noteViewModel.changeStateDelete(false)
                  dialogBuilder = context?.let { AlertDialog.Builder(it) }!!
                  dialogBuilder.setMessage(resources.getString(R.string.delete_msg_note))
 
@@ -71,7 +71,31 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
                  dialogCreate = dialogBuilder.create()
                  dialogCreate.show()
 
+                 noteViewModel.changeStateDelete(false)
+
+                 backPressed()
+
         }//end showDialogDelete
+
+        private fun backPressed(){
+
+               dialogCreate.onBackPressedDispatcher.addCallback(object : OnBackPressedCallback(true){
+
+                       override fun handleOnBackPressed() {
+
+                               if(isEnabled) {
+
+                                    dialogCreate.cancel()
+                                    check = true
+
+                                }
+                       }
+
+
+               })
+
+        }//end backPressed
+
 
          private fun positiveButtonDelete(){
 
@@ -79,7 +103,7 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
                       activity!!.applicationContext,
                       noteViewModel.deleteNote.value!!
                   )
-
+                  check = true
          }//end positiveButtonDelete
 
 
@@ -221,5 +245,6 @@ class NoteFragment : BaseFragment<FragmentNoteBinding>(R.layout.fragment_note) {
 
                     noteAdapter.setItem(item)
            }//end onSuccessNote
+
 
 }//end NoteFragment

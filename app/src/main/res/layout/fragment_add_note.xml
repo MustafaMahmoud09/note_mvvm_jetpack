@@ -8,7 +8,7 @@
 
      <variable
          name="viewModel"
-         type="com.lomu.note_mvvm.viewModel.subViewModel.NoteViewModel" />
+         type="com.lomu.note_mvvm.viewModel.subViewModel.AddNoteViewModel" />
 
     </data>
 
